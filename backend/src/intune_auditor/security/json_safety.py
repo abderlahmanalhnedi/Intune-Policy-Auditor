@@ -2,10 +2,37 @@
 
 from __future__ import annotations
 
+import codecs
 import json
 from typing import Any, cast
 
 _DEFAULT_MAX_NESTING_DEPTH = 500
+
+
+def decode_supported_json_text(content: bytes | bytearray) -> str:
+    """Decode JSON bytes from the explicitly supported, unambiguous encodings."""
+    raw = bytes(content)
+    if raw.startswith(codecs.BOM_UTF32_LE) or raw.startswith(codecs.BOM_UTF32_BE):
+        raise ValueError("unsupported_encoding")
+    if raw.startswith(codecs.BOM_UTF8):
+        payload = raw[len(codecs.BOM_UTF8) :]
+        encoding = "utf-8"
+    elif raw.startswith(codecs.BOM_UTF16_LE):
+        payload = raw[len(codecs.BOM_UTF16_LE) :]
+        encoding = "utf-16-le"
+    elif raw.startswith(codecs.BOM_UTF16_BE):
+        payload = raw[len(codecs.BOM_UTF16_BE) :]
+        encoding = "utf-16-be"
+    else:
+        payload = raw
+        encoding = "utf-8"
+    try:
+        decoded = payload.decode(encoding, errors="strict")
+    except UnicodeDecodeError as exc:
+        raise ValueError("unsupported_encoding") from exc
+    if "\x00" in decoded:
+        raise ValueError("unsupported_encoding")
+    return decoded
 
 
 def _reject_non_finite(value: str) -> None:
@@ -19,13 +46,6 @@ def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
             raise ValueError(f"duplicate_json_key:{key}")
         result[key] = value
     return result
-
-
-def _text_for_nesting_check(content: str | bytes | bytearray) -> str:
-    if isinstance(content, str):
-        return content
-    raw = bytes(content)
-    return raw.decode(json.detect_encoding(raw))
 
 
 def _validate_nesting_depth(content: str, maximum: int) -> None:
@@ -57,12 +77,13 @@ def strict_json_loads(
     max_nesting_depth: int = _DEFAULT_MAX_NESTING_DEPTH,
 ) -> object:
     """Decode standards-compliant JSON without silent duplicate-key replacement."""
-    _validate_nesting_depth(_text_for_nesting_check(content), max_nesting_depth)
+    text = content if isinstance(content, str) else decode_supported_json_text(content)
+    _validate_nesting_depth(text, max_nesting_depth)
     try:
         return cast(
             object,
             json.loads(
-                content,
+                text,
                 parse_constant=_reject_non_finite,
                 object_pairs_hook=_reject_duplicate_keys,
             ),

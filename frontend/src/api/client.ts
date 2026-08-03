@@ -33,11 +33,16 @@ interface Problem {
   request_id?: string;
 }
 
+function technicalProblemCode(detail?: string): string | undefined {
+  return detail?.match(/^([a-z][a-z0-9_]*)(?::|$)/)?.[1];
+}
+
 export class ApiError extends Error {
   constructor(
     message: string,
     public readonly status: number,
     public readonly requestId?: string,
+    public readonly code?: string,
   ) {
     super(message);
     this.name = "ApiError";
@@ -58,7 +63,12 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     } catch {
       problem = {};
     }
-    throw new ApiError(problem.detail ?? problem.title ?? `HTTP ${String(response.status)}`, response.status, problem.request_id);
+    throw new ApiError(
+      problem.detail ?? problem.title ?? `HTTP ${String(response.status)}`,
+      response.status,
+      problem.request_id,
+      technicalProblemCode(problem.detail),
+    );
   }
   return (await response.json()) as T;
 }

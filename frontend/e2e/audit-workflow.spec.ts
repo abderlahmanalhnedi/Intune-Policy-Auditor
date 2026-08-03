@@ -10,12 +10,17 @@ const root = path.resolve(here, "../..");
 const samples = path.join(root, "samples", "policies");
 const generated = path.join(root, "frontend", "test-results", "generated");
 const policyZip = path.join(generated, "policies.zip");
+const utf16Policy = path.join(generated, "policy-utf16-le.json");
+const binaryJson = path.join(generated, "binary.json");
 
 test.beforeAll(async () => {
   await mkdir(generated, { recursive: true });
   const zip = new JSZip();
-  zip.file("policy.json", await readFile(path.join(samples, "01-core-device-security.json")));
+  const policy = await readFile(path.join(samples, "01-core-device-security.json"));
+  zip.file("policy.json", policy);
   await writeFile(policyZip, await zip.generateAsync({ type: "nodebuffer" }));
+  await writeFile(utf16Policy, Buffer.concat([Buffer.from([0xff, 0xfe]), Buffer.from(policy.toString("utf8"), "utf16le")]));
+  await writeFile(binaryJson, Buffer.from([0x00, 0x01, 0x4d, 0x5a, 0xff, 0x10]));
 });
 
 test("demo audit covers navigation, modes, themes, languages, and reports", async ({ page }) => {
@@ -79,11 +84,11 @@ test("offline wizard accepts multiple JSON files, deviations, and a selected pac
   await expect(page.getByRole("table").getByRole("row", { name: /Accepted deviation/ }).first()).toBeVisible();
 });
 
-test("single JSON and ZIP inputs succeed while malformed JSON is rejected", async ({ page }) => {
+test("UTF-16 JSON and ZIP inputs succeed while malformed and binary JSON are localized", async ({ page }) => {
   await page.goto("/audit/new");
   await page.getByLabel("Sprache").selectOption("en");
   await page.locator('input[type="file"][multiple]').setInputFiles(
-    path.join(samples, "01-core-device-security.json"),
+    utf16Policy,
   );
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
@@ -101,6 +106,15 @@ test("single JSON and ZIP inputs succeed while malformed JSON is rejected", asyn
   await page.locator('input[type="file"][multiple]').setInputFiles(
     path.join(root, "samples", "malformed", "malformed.json"),
   );
-  await page.getByRole("button", { name: /Weiter|Continue/ }).click();
-  await expect(page.getByRole("alert")).toContainText(/malformed|JSON|abgelehnt|rejected/i);
+  await page.getByRole("button", { name: "Continue" }).click();
+  await expect(page.getByRole("alert")).toContainText("File cannot be read");
+  await expect(page.getByRole("alert")).toContainText("The file does not contain a supported JSON document. Intune exports must be stored as UTF-8 or UTF-16 with an unambiguous byte order.");
+  await expect(page.getByRole("alert")).not.toContainText("malformed_json");
+
+  await page.locator('input[type="file"][multiple]').setInputFiles(binaryJson);
+  await page.getByRole("button", { name: "Continue" }).click();
+  await expect(page.getByRole("alert")).toContainText("File cannot be read");
+  await expect(page.getByRole("alert")).not.toContainText("unsupported_encoding");
+  await page.getByLabel("View").selectOption("expert");
+  await expect(page.getByRole("alert")).toContainText("Technical error: unsupported_encoding");
 });

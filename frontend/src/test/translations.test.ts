@@ -19,4 +19,19 @@ describe("translations", () => {
     expect(resources.en.translation.common.notEvaluable).toBe("Not evaluable");
     expect(resources.en.translation.about.disclaimer).toContain("not affiliated");
   });
+
+  it("contains the exact localized JSON upload encoding guidance", () => {
+    expect(resources.de.translation.newAudit.uploadReadErrorTitle).toBe(
+      "Datei kann nicht gelesen werden",
+    );
+    expect(resources.de.translation.newAudit.uploadReadErrorText).toBe(
+      "Die Datei enthält kein unterstütztes JSON-Dokument. Intune-Exporte müssen als UTF-8 oder UTF-16 mit eindeutiger Byte-Reihenfolge gespeichert sein.",
+    );
+    expect(resources.en.translation.newAudit.uploadReadErrorTitle).toBe(
+      "File cannot be read",
+    );
+    expect(resources.en.translation.newAudit.uploadReadErrorText).toBe(
+      "The file does not contain a supported JSON document. Intune exports must be stored as UTF-8 or UTF-16 with an unambiguous byte order.",
+    );
+  });
 });

@@ -38,8 +38,6 @@ def validate_uploads(
             raise ValueError("empty_file")
         suffix = PurePath(filename).suffix.lower()
         if suffix == ".json":
-            if b"\x00" in content[:4096]:
-                raise ValueError("binary_data_not_json")
             validated.append(ValidatedUpload(filename=filename, content=content))
         elif suffix == ".zip":
             for member in read_safe_zip(content, limits):

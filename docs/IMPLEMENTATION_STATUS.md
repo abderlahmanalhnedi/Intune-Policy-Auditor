@@ -8,7 +8,7 @@ Phase 7 — polish and release validation — is complete for the production-rea
 
 - Built the greenfield FastAPI/Pydantic v2/SQLAlchemy/Alembic/SQLite backend and strict React/TypeScript/Vite frontend as a local monorepo.
 - Serve the compiled SPA and versioned `/api/v1` API from one Uvicorn process on `127.0.0.1:8765`.
-- Implemented bounded JSON/multiple-file/JSON-only ZIP ingestion, strict duplicate/non-finite/depth-safe JSON decoding, deterministic normalization, typed parser diagnostics, preview counts, unknown-setting preservation, and secure filename/archive/report handling.
+- Implemented bounded JSON/multiple-file/JSON-only ZIP ingestion, BOM-aware UTF-8/UTF-16 decoding, strict duplicate/non-finite/depth-safe JSON parsing, deterministic normalization, typed parser diagnostics, preview counts, unknown-setting preservation, localized upload failures, and secure filename/archive/report handling.
 - Added the hash-bound `synthetic.test-baseline`, six explicitly marked synthetic policies, accepted/expired deviations, every required nuanced alignment state, confirmed/probable/possible conflicts, broad-assignment warnings, and synthetic runtime failure evidence.
 - Implemented evidence, evidence-type/vendor, severity, platform/scope, applicability, exact-value, deviation, assignment, conflict, coverage, and overall-decision gates with deterministic traces. Pack validation rejects alias/canonical collisions, false exact-value counts, invalid canonical baselines, and comparison parameters that disagree with the baseline.
 - Implemented explicit comparison rules for boolean/integer/decimal/string/enum/choice/list/set/range/object/not-configured/unknown values and every specified comparison mode. No keyword, regex, fuzzy, category, or AI signal can create a Microsoft judgment.
@@ -32,10 +32,10 @@ The final 500-policy/10,000-unique-setting smoke completed in 0.306 seconds for 
 ## Tests already passing
 
 - Backend compileall, Ruff format/check, strict MyPy across 65 source files, and Bandit: passing.
-- Backend pytest: 146 tests passing with 81% statement/branch-aware coverage across 3,532 statements and 912 branches.
+- Backend pytest: 159 tests passing with 81% statement/branch-aware coverage across 3,546 statements and 918 branches.
 - Frontend ESLint and strict TypeScript: passing.
-- Frontend Vitest/Testing Library: 5 files, 11 tests passing.
-- Playwright Chromium: 3 workflows passing at production URL, including the 1024×768 layout.
+- Frontend Vitest/Testing Library: 5 files, 12 tests passing.
+- Playwright Chromium: 3 workflows passing at production URL, including UTF-16 upload/error localization and the 1024×768 layout.
 - Direct setup/build/test/start lifecycle and one-process production smoke: passing; route splitting keeps every emitted JavaScript chunk below 500 kB.
 - Synthetic pack validation and required CLI audit: passing.
 - npm audit and Python pip-audit: no known vulnerabilities.

@@ -29,7 +29,7 @@ from intune_auditor.domain.models import (
     SettingObservation,
     UploadedSource,
 )
-from intune_auditor.security.json_safety import strict_json_loads
+from intune_auditor.security.json_safety import decode_supported_json_text, strict_json_loads
 from intune_auditor.security.limits import ProcessingLimits
 from intune_auditor.security.uploads import ValidatedUpload
 from intune_auditor.version import PARSER_VERSION
@@ -278,10 +278,7 @@ class PolicyParser:
         )
 
     def _decode(self, source: ValidatedUpload) -> object:
-        try:
-            text = source.content.decode("utf-8-sig")
-        except UnicodeDecodeError as exc:
-            raise ValueError("unsupported_encoding") from exc
+        text = decode_supported_json_text(source.content)
         if len(text) > self.limits.maximum_string_length * 100:
             raise ValueError("json_text_too_large")
         try:
