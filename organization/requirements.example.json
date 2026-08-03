@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "requirements": [
+    {
+      "requirement_id": "synthetic-pilot-required",
+      "title": "Pilot changes that may affect connectivity",
+      "description": "Synthetic organizational context only; not Microsoft guidance.",
+      "applies_to": ["windows"]
+    }
+  ]
+}
+

@@ -1,0 +1,22 @@
+{
+  "id": "demo-firewall-exception",
+  "isSynthetic": true,
+  "name": "Firewall Exception — Synthetic",
+  "description": "Demonstrates a confirmed conflict and a runtime error.",
+  "platform": "windows",
+  "policyKind": "endpoint_security",
+  "scope": "device",
+  "settings": [{"settingDefinitionId": "synthetic/firewall_mode", "value": "audit"}],
+  "assignments": [{"target": {"type": "all_devices", "displayName": "All Devices"}}],
+  "runtimeEvidence": {
+    "state": "error",
+    "targetedCount": 24,
+    "successCount": 20,
+    "errorCount": 4,
+    "conflictCount": 0,
+    "pendingCount": 0,
+    "notApplicableCount": 0,
+    "reportTimestamp": "2026-08-03T08:00:00Z",
+    "apiVersion": "synthetic"
+  }
+}

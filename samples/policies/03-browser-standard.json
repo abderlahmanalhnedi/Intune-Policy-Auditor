@@ -1,0 +1,15 @@
+{
+  "id": "demo-browser-standard",
+  "isSynthetic": true,
+  "name": "Browser Standard — Synthetic",
+  "description": "Demonstrates non-orderable and unknown settings.",
+  "platform": "windows",
+  "policyKind": "administrative_templates",
+  "scope": "device",
+  "settings": [
+    {"settingDefinitionId": "synthetic/extension_mode", "value": "blocklist"},
+    {"settingDefinitionId": "synthetic/unknown_cloud_toggle", "value": true},
+    {"settingDefinitionId": "synthetic/legacy_protocol_mode", "value": "mystery"}
+  ],
+  "assignments": [{"target": {"type": "group", "groupId": "office-devices", "displayName": "Synthetic Office Devices", "scope": "device"}}]
+}

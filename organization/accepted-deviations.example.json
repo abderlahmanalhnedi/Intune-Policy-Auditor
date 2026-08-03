@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "deviations": [
+    {
+      "deviation_id": "synthetic-active-password-length",
+      "schema_version": "1.0",
+      "canonical_setting_id": "windows:intune:device:synthetic/password_length",
+      "policy_id": "demo-core-device-security",
+      "accepted_value": 10,
+      "reason": "Synthetic line-of-business compatibility exercise",
+      "owner": "Synthetic Security Team",
+      "approver": "Synthetic Change Board",
+      "ticket": "DEMO-1001",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31"
+    },
+    {
+      "deviation_id": "synthetic-expired-lock-timeout",
+      "schema_version": "1.0",
+      "canonical_setting_id": "windows:intune:device:synthetic/screen_lock_timeout",
+      "policy_id": "demo-core-device-security",
+      "accepted_value": 20,
+      "reason": "Expired synthetic kiosk workflow exception",
+      "owner": "Synthetic Workplace Team",
+      "approver": "Synthetic Change Board",
+      "ticket": "DEMO-0999",
+      "valid_from": "2024-01-01",
+      "valid_until": "2025-12-31"
+    }
+  ]
+}
+

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "pack_id": "synthetic.test-baseline",
+  "vendor": "Intune Policy Auditor",
+  "product": "Synthetic Demonstration",
+  "baseline_name": "Synthetic Test Baseline",
+  "baseline_version": "1.0.0",
+  "platform": "windows",
+  "source_type": "organizational_requirement",
+  "source_title": "Synthetic test definitions",
+  "source_domain": "local.synthetic",
+  "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+  "published_at": "2026-08-03",
+  "verified_at": "2026-08-03",
+  "imported_at": "2026-08-03T00:00:00Z",
+  "data_sha256": "d68823efff31267af63332d2b3caeb5d09404e945adc101d4ced8f532fc73a26",
+  "schema_sha256": "cd069ae1f6ed3490eff3480d934fcfe53a1321047a14c3a86297962deee4eaf7",
+  "application_version": "3.0.0-dev",
+  "status": "synthetic",
+  "setting_count": 7,
+  "exact_value_count": 7,
+  "notes": [
+    "Synthetische Demodaten – keine offizielle Microsoft-Baseline",
+    "Synthetic demonstration data – not an official Microsoft baseline"
+  ],
+  "settings_file": "settings.json",
+  "provenance": {
+    "input_files": ["settings.json"],
+    "input_sha256": [],
+    "importer_version": "3.0.0",
+    "notes": ["Created only for deterministic product tests."]
+  }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PolicyRules>
+  <Policy Name="Synthetic password test" Value="14" />
+  <Policy Name="Synthetic firewall test" Value="Enabled" />
+</PolicyRules>
+

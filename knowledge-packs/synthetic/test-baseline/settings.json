@@ -1,0 +1,188 @@
+[
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/firewall_mode",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetischer Firewallmodus", "en": "Synthetic firewall mode"},
+    "category": {"de": "Netzwerkschutz", "en": "Network protection"},
+    "description": {"de": "Fiktive Einstellung zur Demonstration einer geordneten Auswertung.", "en": "Fictional setting demonstrating an ordered evaluation."},
+    "baseline_value": "block",
+    "value_definition": {
+      "value_type": "enum",
+      "allowed_values": ["off", "audit", "block"],
+      "value_labels": {
+        "off": {"de": "Aus", "en": "Off"},
+        "audit": {"de": "Überwachen", "en": "Audit"},
+        "block": {"de": "Blockieren", "en": "Block"}
+      },
+      "semantic_mapping": {}
+    },
+    "comparison_rule": {"mode": "ordered", "ordered_values": ["off", "audit", "block"]},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Die synthetische Schutzwirkung ist geringer.", "en": "The synthetic protection effect is lower."},
+    "impact_more_restrictive": {"de": "Die synthetische Einstellung kann Verbindungen blockieren.", "en": "The synthetic setting may block connectivity."},
+    "connectivity_risk": {"de": "Vor einer Änderung im Pilot testen.", "en": "Pilot before changing."},
+    "aliases": ["device_vendor_msft_policy_config_synthetic_firewall_mode"],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "high"
+  },
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/password_length",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetische Mindestkennwortlänge", "en": "Synthetic minimum password length"},
+    "category": {"de": "Authentifizierung", "en": "Authentication"},
+    "description": {"de": "Fiktiver Zahlenwert für Mindestvergleiche.", "en": "Fictional numeric value for minimum comparisons."},
+    "baseline_value": 14,
+    "value_definition": {"value_type": "integer", "allowed_values": [], "value_labels": {}, "semantic_mapping": {}},
+    "comparison_rule": {"mode": "numeric_minimum", "minimum": 14},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Kürzere synthetische Kennwörter reduzieren den angenommenen Suchraum.", "en": "Shorter synthetic passwords reduce the assumed search space."},
+    "impact_more_restrictive": {"de": "Längere Kennwörter können den Supportaufwand erhöhen.", "en": "Longer passwords may increase support effort."},
+    "aliases": [],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "medium"
+  },
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/extension_mode",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetischer Erweiterungsmodus", "en": "Synthetic extension mode"},
+    "category": {"de": "Browser", "en": "Browser"},
+    "description": {"de": "Fiktive nicht geordnete Auswahl.", "en": "Fictional non-ordered choice."},
+    "baseline_value": "allowlist",
+    "value_definition": {"value_type": "choice", "allowed_values": ["allowlist", "blocklist"], "value_labels": {}, "semantic_mapping": {}},
+    "comparison_rule": {"mode": "not_orderable"},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Nicht anwendbar; die Werte sind nicht geordnet.", "en": "Not applicable; values are not ordered."},
+    "impact_more_restrictive": {"de": "Ein anderer Modus kann Geschäftsabläufe beeinträchtigen.", "en": "A different mode can affect business workflows."},
+    "aliases": [],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "information"
+  },
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/screen_lock_timeout",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetische Sperrzeit", "en": "Synthetic lock timeout"},
+    "category": {"de": "Gerätesperre", "en": "Device lock"},
+    "description": {"de": "Fiktive maximale Zeit in Minuten.", "en": "Fictional maximum duration in minutes."},
+    "baseline_value": 10,
+    "value_definition": {"value_type": "integer", "allowed_values": [], "value_labels": {}, "semantic_mapping": {}},
+    "comparison_rule": {"mode": "numeric_maximum", "maximum": 10},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Das synthetische Gerät bleibt länger entsperrt.", "en": "The synthetic device remains unlocked longer."},
+    "impact_more_restrictive": {"de": "Häufigere Sperren können Arbeitsabläufe unterbrechen.", "en": "More frequent locks can interrupt workflows."},
+    "aliases": [],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "medium"
+  },
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/telemetry_mode",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetischer Telemetriemodus", "en": "Synthetic telemetry mode"},
+    "category": {"de": "Diagnose", "en": "Diagnostics"},
+    "description": {"de": "Fiktive geordnete Einstellung für Konflikttests.", "en": "Fictional ordered setting for conflict tests."},
+    "baseline_value": "required",
+    "value_definition": {"value_type": "enum", "allowed_values": ["off", "optional", "required"], "value_labels": {}, "semantic_mapping": {}},
+    "comparison_rule": {"mode": "ordered", "ordered_values": ["off", "optional", "required"]},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Weniger synthetische Diagnosedaten stehen zur Verfügung.", "en": "Less synthetic diagnostic data is available."},
+    "impact_more_restrictive": {"de": "Mehr Datenerfassung kann Datenschutzanforderungen berühren.", "en": "Additional collection may affect privacy requirements."},
+    "aliases": [],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "low"
+  },
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/legacy_protocol_mode",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetischer Legacyprotokollmodus", "en": "Synthetic legacy protocol mode"},
+    "category": {"de": "Protokolle", "en": "Protocols"},
+    "description": {"de": "Fiktive Einstellung mit bewusst begrenzter Wertsemantik.", "en": "Fictional setting with deliberately limited value semantics."},
+    "baseline_value": "blocked",
+    "value_definition": {"value_type": "enum", "allowed_values": ["blocked", "allowed"], "value_labels": {}, "semantic_mapping": {}},
+    "comparison_rule": {"mode": "ordered", "ordered_values": ["allowed", "blocked"]},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Nur für synthetische Tests.", "en": "For synthetic testing only."},
+    "impact_more_restrictive": {"de": "Nur für synthetische Tests.", "en": "For synthetic testing only."},
+    "aliases": [],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "information"
+  },
+  {
+    "canonical_setting_id": "windows:intune:device:synthetic/update_rings",
+    "platform": "windows",
+    "scope": "device",
+    "display_name": {"de": "Synthetische Updateringe", "en": "Synthetic update rings"},
+    "category": {"de": "Updates", "en": "Updates"},
+    "description": {"de": "Fiktive Mengeneinstellung.", "en": "Fictional set setting."},
+    "baseline_value": ["stable", "security"],
+    "value_definition": {"value_type": "set", "allowed_values": ["stable", "security", "preview"], "value_labels": {}, "semantic_mapping": {}},
+    "comparison_rule": {"mode": "set_contains"},
+    "applicability": {"platforms": ["windows"], "scopes": ["device"]},
+    "impact_less_restrictive": {"de": "Ein synthetisch benötigter Ring fehlt.", "en": "A synthetically required ring is missing."},
+    "impact_more_restrictive": {"de": "Zusätzliche Ringe können Pilotaufwand erzeugen.", "en": "Additional rings may create pilot effort."},
+    "aliases": [],
+    "evidence_sources": [{
+      "evidence_type": "organizational_requirement",
+      "title": "Synthetic test definition",
+      "source_reference": "urn:intune-policy-auditor:synthetic:test-baseline",
+      "source_domain": "local.synthetic",
+      "verified_at": "2026-08-03",
+      "confidence": "exact",
+      "is_official": false
+    }],
+    "severity_if_less_restrictive": "low"
+  }
+]
+

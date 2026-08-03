@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://intune-policy-auditor.local/schema/organization-requirement-1.0.json",
+  "title": "Organization requirement file",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "requirements"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "title", "description", "applies_to"],
+        "properties": {
+          "requirement_id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1},
+          "applies_to": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}
+

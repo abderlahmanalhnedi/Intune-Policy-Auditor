@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://intune-policy-auditor.local/schema/knowledge-pack-manifest-1.0.json",
+  "title": "Intune Policy Auditor knowledge-pack manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "pack_id", "vendor", "product", "baseline_name", "baseline_version",
+    "platform", "source_type", "source_title", "source_domain", "source_reference",
+    "verified_at", "imported_at", "data_sha256", "schema_sha256", "application_version",
+    "status", "setting_count", "exact_value_count", "settings_file"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "pack_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+    "vendor": {"type": "string", "minLength": 1},
+    "product": {"type": "string", "minLength": 1},
+    "baseline_name": {"type": "string", "minLength": 1},
+    "baseline_version": {"type": "string", "minLength": 1},
+    "platform": {"enum": ["windows", "macos", "ios", "ipados", "android", "linux", "unknown"]},
+    "source_type": {"type": "string"},
+    "source_title": {"type": "string", "minLength": 1},
+    "source_domain": {"type": "string", "minLength": 1},
+    "source_reference": {"type": "string", "minLength": 1},
+    "published_at": {"type": ["string", "null"], "format": "date"},
+    "verified_at": {"type": "string", "format": "date"},
+    "imported_at": {"type": "string", "format": "date-time"},
+    "data_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "schema_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "application_version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["synthetic", "verified", "pending_review", "invalid"]},
+    "setting_count": {"type": "integer", "minimum": 0},
+    "exact_value_count": {"type": "integer", "minimum": 0},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "settings_file": {"type": "string", "pattern": "^[^/\\\\]+\\.json$"},
+    "provenance": {"type": "object"}
+  }
+}
+

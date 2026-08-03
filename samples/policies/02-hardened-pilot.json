@@ -1,0 +1,14 @@
+{
+  "id": "demo-hardened-pilot",
+  "isSynthetic": true,
+  "name": "Hardened Pilot — Synthetic",
+  "description": "Demonstrates a provably more restrictive value.",
+  "platform": "windows",
+  "policyKind": "endpoint_security",
+  "scope": "device",
+  "settings": [
+    {"settingDefinitionId": "synthetic/password_length", "value": 18},
+    {"settingDefinitionId": "synthetic/update_rings", "value": ["stable", "security", "preview"]}
+  ],
+  "assignments": [{"target": {"type": "group", "groupId": "pilot-devices", "displayName": "Synthetic Pilot Devices", "scope": "device"}}]
+}

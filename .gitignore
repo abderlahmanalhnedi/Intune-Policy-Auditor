@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+backend/.venv/
+
+# JavaScript
+frontend/node_modules/
+frontend/dist/
+frontend/playwright-report/
+frontend/test-results/
+
+# Local configuration and data
+backend/.env
+.env
+*.sqlite3
+*.db
+.tools/
+tmp/*
+!tmp/.gitkeep
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/

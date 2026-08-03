@@ -1,0 +1,10 @@
+{
+  "id": "demo-telemetry-office",
+  "isSynthetic": true,
+  "name": "Telemetry Office — Synthetic",
+  "platform": "windows",
+  "policyKind": "settings_catalog",
+  "scope": "device",
+  "settings": [{"settingDefinitionId": "synthetic/telemetry_mode", "value": "required"}],
+  "assignments": [{"target": {"type": "group", "groupId": "office-devices", "displayName": "Synthetic Office Devices", "scope": "device"}}]
+}

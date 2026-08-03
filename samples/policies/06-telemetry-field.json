@@ -1,0 +1,10 @@
+{
+  "id": "demo-telemetry-field",
+  "isSynthetic": true,
+  "name": "Telemetry Field — Synthetic",
+  "platform": "windows",
+  "policyKind": "settings_catalog",
+  "scope": "device",
+  "settings": [{"settingDefinitionId": "synthetic/telemetry_mode", "value": "off"}],
+  "assignments": [{"target": {"type": "group", "groupId": "field-devices", "displayName": "Synthetic Field Devices", "scope": "device"}}]
+}

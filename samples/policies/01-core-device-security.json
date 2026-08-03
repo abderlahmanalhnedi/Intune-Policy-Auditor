@@ -1,0 +1,15 @@
+{
+  "id": "demo-core-device-security",
+  "isSynthetic": true,
+  "name": "Core Device Security — Synthetic",
+  "description": "Demonstrates aligned, accepted, and expired outcomes.",
+  "platform": "windows",
+  "policyKind": "settings_catalog",
+  "scope": "device",
+  "settings": [
+    {"settingDefinitionId": "synthetic/firewall_mode", "value": "block"},
+    {"settingDefinitionId": "synthetic/password_length", "value": 10},
+    {"settingDefinitionId": "synthetic/screen_lock_timeout", "value": 20}
+  ],
+  "assignments": [{"target": {"type": "all_devices", "displayName": "All Devices"}}]
+}

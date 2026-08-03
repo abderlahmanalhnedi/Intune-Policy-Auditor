@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://intune-policy-auditor.local/schema/accepted-deviation-1.0.json",
+  "title": "Accepted organizational deviation file",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "deviations"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["deviation_id", "schema_version", "canonical_setting_id", "accepted_value", "reason", "owner", "approver", "ticket", "valid_from", "valid_until"],
+        "properties": {
+          "deviation_id": {"type": "string", "minLength": 1},
+          "schema_version": {"const": "1.0"},
+          "canonical_setting_id": {"type": "string", "minLength": 5},
+          "policy_id": {"type": ["string", "null"]},
+          "accepted_value": true,
+          "reason": {"type": "string", "minLength": 1},
+          "owner": {"type": "string", "minLength": 1},
+          "approver": {"type": "string", "minLength": 1},
+          "ticket": {"type": "string", "minLength": 1},
+          "valid_from": {"type": "string", "format": "date"},
+          "valid_until": {"type": "string", "format": "date"}
+        }
+      }
+    }
+  }
+}
+
