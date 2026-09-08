@@ -51,6 +51,7 @@ def main() -> int:
             stderr=subprocess.STDOUT,
             text=True,
         )
+        failed = False
         try:
             for _ in range(120):
                 if process.poll() is not None:
@@ -81,6 +82,9 @@ def main() -> int:
                 raise RuntimeError("report_failed")
             print("production smoke passed")
             return 0
+        except Exception:
+            failed = True
+            raise
         finally:
             process.terminate()
             try:
@@ -88,8 +92,9 @@ def main() -> int:
             except subprocess.TimeoutExpired:
                 process.kill()
                 process.wait(timeout=5)
-            if process.returncode not in {0, -15, 15, 143, 1}:
-                output = process.stdout.read() if process.stdout else ""
+            output = process.stdout.read() if process.stdout else ""
+            if failed or process.returncode not in {0, -15, 15, 143, 1}:
+                print("--- uvicorn output ---", file=sys.stderr)
                 print(output, file=sys.stderr)
 
 
