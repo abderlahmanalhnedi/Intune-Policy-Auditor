@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import shutil
 import tempfile
 from collections.abc import Iterator
@@ -18,6 +19,8 @@ from intune_auditor.security.archive import read_safe_zip
 from intune_auditor.security.limits import ProcessingLimits
 
 _ACTIVE_KEY = "active_knowledge_pack_ids"
+
+logger = logging.getLogger(__name__)
 
 
 class KnowledgePackManager:
@@ -43,7 +46,9 @@ class KnowledgePackManager:
     def active_ids(self) -> set[str]:
         if self.database is None:
             return {"synthetic.test-baseline"}
+        logger.info("knowledge_pack_active_ids_database_read_start")
         stored = self.database.get_setting(_ACTIVE_KEY, ["synthetic.test-baseline"])
+        logger.info("knowledge_pack_active_ids_database_read_complete")
         return (
             {str(item) for item in stored}
             if isinstance(stored, list)
@@ -51,10 +56,12 @@ class KnowledgePackManager:
         )
 
     def list(self) -> list[LoadedKnowledgePack]:
+        logger.info("knowledge_pack_list_start")
         paths = [self.built_in_path, *self.extra_paths]
         if self.import_dir.is_dir():
             paths.extend(path for path in self.import_dir.iterdir() if path.is_dir())
         active = self.active_ids()
+        logger.info("knowledge_pack_list_active_ids_complete")
         packs: list[LoadedKnowledgePack] = []
         seen: set[str] = set()
         for path in paths:
@@ -66,6 +73,7 @@ class KnowledgePackManager:
                 continue
             seen.add(pack.manifest.pack_id)
             packs.append(pack.model_copy(update={"active": pack.manifest.pack_id in active}))
+        logger.info("knowledge_pack_list_complete")
         return packs
 
     def get(self, pack_id: str) -> LoadedKnowledgePack | None:
