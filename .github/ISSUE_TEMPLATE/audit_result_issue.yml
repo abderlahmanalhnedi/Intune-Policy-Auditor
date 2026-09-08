@@ -1,0 +1,86 @@
+name: "🔎 Audit Result / False Positive"
+description: Report an incorrect, missing, or unexpected audit finding
+title: "[Audit Result]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when a finding, comparison, conflict, or evaluation result
+        appears incorrect.
+
+        Do not upload production policy exports unless they are safely sanitized.
+
+  - type: dropdown
+    id: result_type
+    attributes:
+      label: Result type
+      options:
+        - False positive
+        - False negative
+        - Incorrect severity
+        - Incorrect comparison
+        - Incorrect conflict detection
+        - Incorrect assignment analysis
+        - Unexpected Not evaluable result
+        - Unexpected unsupported / not applicable result
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: setting_id
+    attributes:
+      label: Setting identifier
+      description: Exact normalized setting ID or other non-sensitive identifier if available
+      placeholder: "Example: exact setting ID"
+
+  - type: input
+    id: pack
+    attributes:
+      label: Knowledge pack and version
+      placeholder: "Example: synthetic.test-baseline / 1.0.0"
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed result
+      description: What did Intune Policy Auditor report?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What should the result have been, and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: sanitized_input
+    attributes:
+      label: Sanitized input example
+      description: Include the smallest possible sanitized JSON example that reproduces the issue.
+      render: json
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / reference
+      description: Add relevant Microsoft documentation or other authoritative evidence when applicable.
+
+  - type: textarea
+    id: trace
+    attributes:
+      label: Decision trace / report excerpt
+      description: Paste the relevant sanitized decision trace or report excerpt.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: The example does not contain secrets or confidential tenant data.
+          required: true
+        - label: I am reporting the auditor's behavior, not asking it to guess unsupported Microsoft recommendations.
+          required: true

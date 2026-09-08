@@ -1,0 +1,72 @@
+name: "☁️ Tenant Mode / Microsoft Graph"
+description: Report read-only Graph authentication or retrieval problems
+title: "[Tenant Mode]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tenant Mode is read-only and partially implemented.
+
+        Never post access tokens, refresh tokens, client secrets, passwords,
+        private keys, authentication cookies, or unredacted tenant data.
+
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where does the problem occur?
+      options:
+        - Device-code authentication
+        - Consent / permissions
+        - Graph request
+        - Policy retrieval
+        - Graph response parsing
+        - Mapping retrieved data into an audit
+        - Token handling
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: graph_endpoint
+    attributes:
+      label: Graph endpoint
+      description: Redacted endpoint path if relevant
+      placeholder: "Example: /v1.0/deviceManagement/..."
+
+  - type: textarea
+    id: permissions
+    attributes:
+      label: Granted Microsoft Graph permissions
+      description: List only permission names. Do not include tokens or secrets.
+      placeholder: |
+        DeviceManagementConfiguration.Read.All
+        ...
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Sanitized error response
+      description: Remove tenant IDs, user IDs, tokens, correlation data, and confidential information where appropriate.
+      render: json
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+
+  - type: checkboxes
+    id: security
+    attributes:
+      label: Security confirmation
+      options:
+        - label: I have not included access tokens, refresh tokens, secrets, passwords, or private keys.
+          required: true
+        - label: I understand this project must remain read-only against Intune / Microsoft Graph.
+          required: true
