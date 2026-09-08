@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: "📖 Documentation"
+    url: "https://github.com/abderlahmanalhnedi/Intune-Policy-Auditor#documentation"
+    about: "Check the project documentation, implementation status, limitations, and roadmap before opening an issue."
+
+  - name: "🔐 Security-sensitive report"
+    url: "https://github.com/abderlahmanalhnedi/Intune-Policy-Auditor/security"
+    about: "Do not post credentials, tokens, secrets, or sensitive tenant data in public issues."
