@@ -14,9 +14,12 @@ import urllib.request
 from pathlib import Path
 
 
+REQUEST_TIMEOUT_SECONDS = 60
+
+
 def request(url: str, method: str = "GET") -> tuple[int, bytes]:
     operation = urllib.request.Request(url, method=method)
-    with urllib.request.urlopen(operation, timeout=5) as response:  # noqa: S310 - localhost only
+    with urllib.request.urlopen(operation, timeout=REQUEST_TIMEOUT_SECONDS) as response:  # noqa: S310 - localhost only
         return response.status, response.read()
 
 

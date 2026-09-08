@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "intune-policy-auditor"
 version = "3.0.0.dev0"
 description = "Evidence-based, read-only auditing for exported Microsoft Intune policies"
-readme = "../README.md"
+readme = { text = "Intune Policy Auditor backend package. See the repository README for full project documentation.", content-type = "text/markdown" }
 requires-python = ">=3.11"
 license = { text = "Proprietary evaluation project; see LICENSE-NOTICE.md" }
 authors = [{ name = "Intune Policy Auditor contributors" }]
