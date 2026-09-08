@@ -1,0 +1,74 @@
+name: "✨ Feature Request"
+description: Suggest a new capability or improvement
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Feature area
+      options:
+        - Audit engine
+        - Policy parser
+        - Dashboard / UX
+        - Findings
+        - Conflict analysis
+        - Reports / exports
+        - Knowledge packs
+        - Tenant Mode / Graph
+        - CLI
+        - Docker / deployment
+        - Documentation
+        - Localization
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What problem would this feature solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the desired behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Intended operating mode
+      multiple: true
+      options:
+        - Offline Mode
+        - Tenant Mode
+        - Both
+        - Not applicable
+
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: Project constraints
+      options:
+        - label: This request preserves the project's read-only behavior toward Intune / Entra / Microsoft Graph.
+          required: true
+        - label: This request does not require guessing unsupported Microsoft recommendations.
+          required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add mockups, examples, references, or other useful context.
