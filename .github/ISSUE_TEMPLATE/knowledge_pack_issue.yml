@@ -1,0 +1,76 @@
+name: "📦 Knowledge Pack Issue"
+description: Report a validation, provenance, mapping, or comparison-rule problem in a knowledge pack
+title: "[Knowledge Pack]: "
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Issue type
+      options:
+        - Pack validation failure
+        - Incorrect setting mapping
+        - Incorrect value semantics
+        - Incorrect comparison rule
+        - Missing provenance
+        - Freshness / verification concern
+        - Import / activation problem
+        - SCT import problem
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: pack
+    attributes:
+      label: Pack name
+      placeholder: "Example: synthetic.test-baseline"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Pack version
+      placeholder: "Example: 1.0.0"
+
+  - type: input
+    id: hash
+    attributes:
+      label: Pack / manifest hash
+      description: Include if available
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem description
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation output
+      render: shell
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Official source / evidence
+      description: Add the authoritative source used to verify the mapping or recommendation, if applicable.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I am not treating the synthetic demonstration pack as an official Microsoft baseline.
+          required: true
+        - label: I did not include confidential tenant data.
+          required: true
