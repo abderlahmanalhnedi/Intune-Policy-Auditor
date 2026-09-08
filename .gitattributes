@@ -1,0 +1,3 @@
+# Keep hash-verified knowledge-pack artifacts byte-identical on every platform.
+# Windows checkouts must not rewrite LF line endings to CRLF before SHA-256 validation.
+knowledge-packs/** text eol=lf
