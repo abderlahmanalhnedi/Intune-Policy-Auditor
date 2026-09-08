@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import logging
 from collections import OrderedDict
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
@@ -42,9 +41,6 @@ from intune_auditor.parsing.service import PolicyParser
 from intune_auditor.persistence.database import Database
 from intune_auditor.security.limits import DEFAULT_LIMITS, ProcessingLimits
 from intune_auditor.security.uploads import ValidatedUpload, validate_uploads
-
-
-logger = logging.getLogger(__name__)
 
 
 def _text(de: str, en: str) -> dict[str, str]:
@@ -166,14 +162,9 @@ class AuditService:
         synthetic: bool = False,
         on_date: date | None = None,
     ) -> AuditResult:
-        logger.info("audit_pipeline_parse_start")
         parser_result = PolicyParser(self.limits).parse(sources)
-        logger.info("audit_pipeline_parse_complete")
-        logger.info("audit_pipeline_pack_selection_start")
         packs = self._select_packs(configuration.active_pack_ids)
-        logger.info("audit_pipeline_pack_selection_complete")
         deviations = load_deviations(deviation_path) if deviation_path else []
-        logger.info("audit_pipeline_deviations_loaded")
         evaluation_engine = EvaluationEngine(packs)
         policies = []
         for policy in parser_result.policies:
@@ -199,9 +190,7 @@ class AuditService:
                     }
                 )
             policies.append(policy_evaluation)
-        logger.info("audit_pipeline_policy_evaluation_complete")
         conflicts = ConflictEngine().analyze(policies)
-        logger.info("audit_pipeline_conflicts_complete")
         metrics = coverage_metrics(policies, conflicts)
         decision = overall_decision(policies, conflicts, metrics)
         findings = [finding for policy in policies for finding in policy.findings]
@@ -222,9 +211,7 @@ class AuditService:
             selected_pack_manifests=[pack.manifest for pack in packs],
         )
         self.store.put(result)
-        logger.info("audit_pipeline_store_complete")
         self._persist_summary_if_enabled(result)
-        logger.info("audit_pipeline_complete")
         return result
 
     def preferences(self) -> dict[str, object]:
@@ -269,10 +256,8 @@ class AuditService:
         )
 
     def demonstration_audit(self, language: str = "de") -> AuditResult:
-        logger.info("demo_audit_start")
         sample_dir = self.repository_root / "samples" / "policies"
         uploads = [(path.name, path.read_bytes()) for path in sorted(sample_dir.glob("*.json"))]
-        logger.info("demo_audit_samples_loaded")
         configuration = AuditConfiguration(
             language=language,
             active_pack_ids=["synthetic.test-baseline"],
