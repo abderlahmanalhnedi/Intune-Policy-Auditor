@@ -14,7 +14,7 @@ import urllib.request
 from pathlib import Path
 
 
-REQUEST_TIMEOUT_SECONDS = 20
+REQUEST_TIMEOUT_SECONDS = 60
 
 
 def request(url: str, method: str = "GET") -> tuple[int, bytes]:
